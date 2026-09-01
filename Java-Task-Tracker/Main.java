@@ -162,6 +162,7 @@ public class Main {
             }
         }
     }
+    
     public static Task findTaskById(ArrayList<Task> tasks, int id){
         for (Task task : tasks){
             if (task.getId() == id){
@@ -169,5 +170,22 @@ public class Main {
             }
         }
         return null;
+    }
+    public static Task getTaskById(Scanner scanner, ArrayList<Task> tasks){
+        System.out.println("Which Id would you like to select");
+        String input = scanner.nextLine();
+    try{
+        int userChoice = Integer.parseInt(input);
+        Task task = findTaskById(tasks, userChoice);
+            if (task == null){
+                System.out.println("Task not found");
+            } else {
+                return Task;
+            }
+        }
+        catch (NumberFormatException e) {
+            System.out.println("Please enter a valid number");
+
+        }
     }
 }
