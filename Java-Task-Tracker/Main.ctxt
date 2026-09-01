@@ -1,8 +1,14 @@
 #BlueJ class context
-#Tue Sep 01 01:37:00 CDT 2026
+#Tue Sep 01 02:18:21 CDT 2026
 comment0.target=Main
 comment1.params=args
 comment1.target=void main(java.lang.String[])
 comment2.params=scanner
 comment2.target=Task createTask(java.util.Scanner)
-numComments=3
+comment3.params=tasks
+comment3.target=void viewTasks(java.util.ArrayList)
+comment4.params=tasks
+comment4.target=void displayNumberedTasks(java.util.ArrayList)
+comment5.params=scanner tasks
+comment5.target=int getTaskIndex(java.util.Scanner, java.util.ArrayList)
+numComments=6
