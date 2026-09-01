@@ -11,7 +11,7 @@ public class Main {
             System.out.println("2.View Tasks");
             System.out.println("3.Mark Task Complete");
             System.out.println("4.Delete Tasks");
-            System.out.println("5.Edit");
+            System.out.println("5.Edit Tasks");
             System.out.println("6.Exit");
             String choice = scanner.nextLine();
             switch (choice) {
@@ -30,8 +30,8 @@ public class Main {
 
                     displayNumberedTasks(tasks);
                     System.out.println("Which task would you like to mark as completed");
-                    int index = getTaskIndex(scanner, tasks);
-                    tasks.get(index).markComplete();
+                    Task task = getTaskById(scanner, tasks);
+                    task.markComplete();
                     System.out.println("Task marked as completed");
                     break;
                 }
@@ -44,8 +44,8 @@ public class Main {
 
                     displayNumberedTasks(tasks);
                     System.out.println("Which task would you like to delete");
-                    int index = getTaskIndex(scanner, tasks);
-                    tasks.remove(index);
+                    Task task = getTaskById(scanner, tasks);
+                    tasks.remove(task);
                     System.out.println("Task Deleted");
                     break;
                 }
@@ -56,9 +56,7 @@ public class Main {
                     }
 
                     displayNumberedTasks(tasks);
-                    System.out.println("Which task would you like to edit");
-                    int index = getTaskIndex(scanner, tasks);
-                    Task task = tasks.get(index);
+                    Task task = getTaskById(scanner, tasks);
                     System.out.println("What would you like to edit?");
                     System.out.println("1. Title");
                     System.out.println("2. Description");
@@ -81,7 +79,7 @@ public class Main {
                         case "3":
                             Priority priority;
                             priority = getPriorityInput(scanner);
-                            
+
                             task.updatePriority(priority);
                             break;
                         case "4":
@@ -162,30 +160,33 @@ public class Main {
             }
         }
     }
-    
-    public static Task findTaskById(ArrayList<Task> tasks, int id){
-        for (Task task : tasks){
-            if (task.getId() == id){
+
+    public static Task findTaskById(ArrayList<Task> tasks, int id) {
+        for (Task task : tasks) {
+            if (task.getId() == id) {
                 return task;
             }
         }
         return null;
     }
-    public static Task getTaskById(Scanner scanner, ArrayList<Task> tasks){
-        System.out.println("Which Id would you like to select");
-        String input = scanner.nextLine();
-    try{
-        int userChoice = Integer.parseInt(input);
-        Task task = findTaskById(tasks, userChoice);
-            if (task == null){
-                System.out.println("Task not found");
-            } else {
-                return Task;
-            }
-        }
-        catch (NumberFormatException e) {
-            System.out.println("Please enter a valid number");
 
+    public static Task getTaskById(Scanner scanner, ArrayList<Task> tasks) {
+        while (true) {
+            System.out.println("Which Id would you like to select");
+            String input = scanner.nextLine();
+            try {
+                int userChoice = Integer.parseInt(input);
+                Task task = findTaskById(tasks, userChoice);
+                if (task == null) {
+                    System.out.println("Task not found");
+                } else {
+                    return task;
+                    
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid number");
+
+            }
         }
     }
 }
