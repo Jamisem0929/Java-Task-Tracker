@@ -7,12 +7,12 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
         while (running) {
-            System.out.println("1.Add Task");
-            System.out.println("2.View Tasks");
-            System.out.println("3.Mark Task Complete");
-            System.out.println("4.Delete Tasks");
-            System.out.println("5.Edit Tasks");
-            System.out.println("6.Exit");
+            System.out.println("1. Add Task");
+            System.out.println("2. View Tasks");
+            System.out.println("3. Mark Task Complete");
+            System.out.println("4. Delete Tasks");
+            System.out.println("5. Edit Tasks");
+            System.out.println("6. Exit");
             String choice = scanner.nextLine();
             switch (choice) {
                 case "1":
@@ -28,7 +28,7 @@ public class Main {
                         break;
                     }
 
-                    displayNumberedTasks(tasks);
+                    viewTasks(tasks);
                     System.out.println("Which task would you like to mark as completed");
                     Task task = getTaskById(scanner, tasks);
                     task.markComplete();
@@ -42,7 +42,7 @@ public class Main {
                         break;
                     }
 
-                    displayNumberedTasks(tasks);
+                    viewTasks(tasks);
                     System.out.println("Which task would you like to delete");
                     Task task = getTaskById(scanner, tasks);
                     tasks.remove(task);
@@ -54,52 +54,58 @@ public class Main {
                         System.out.println("No tasks found");
                         break;
                     }
-
-                    displayNumberedTasks(tasks);
+                    viewTasks(tasks);
                     Task task = getTaskById(scanner, tasks);
-                    System.out.println("What would you like to edit?");
-                    System.out.println("1. Title");
-                    System.out.println("2. Description");
-                    System.out.println("3 Priority");
-                    System.out.println("4. Title and Description");
+                    while (true) {
 
-                    String editChoice = scanner.nextLine();
+                        System.out.println("What would you like to edit?");
+                        System.out.println("1. Title");
+                        System.out.println("2. Description");
+                        System.out.println("3. Priority");
+                        System.out.println("4. Title and Description");
 
-                    switch (editChoice) {
-                        case "1":
-                            System.out.println("Enter new title: ");
-                            String newTitle = scanner.nextLine();
-                            task.updateTitle(newTitle);
-                            break;
-                        case "2":
-                            System.out.println("Enter new description: ");
-                            String newDescription = scanner.nextLine();
-                            task.updateDescription(newDescription);
-                            break;
-                        case "3":
-                            Priority priority;
-                            priority = getPriorityInput(scanner);
+                        String editChoice = scanner.nextLine();
 
-                            task.updatePriority(priority);
-                            break;
-                        case "4":
-                            System.out.println("Enter new title: ");
-                            String title = scanner.nextLine();
+                        switch (editChoice) {
+                            case "1":
+                                System.out.println("Enter new title: ");
+                                String newTitle = scanner.nextLine();
+                                task.updateTitle(newTitle);
+                                break;
+                            case "2":
+                                System.out.println("Enter new description: ");
+                                String newDescription = scanner.nextLine();
+                                task.updateDescription(newDescription);
+                                break;
+                            case "3":
+                                Priority priority = getPriorityInput(scanner);
 
-                            System.out.println("Enter new description: ");
-                            String description = scanner.nextLine();
+                                task.updatePriority(priority);
+                                break;
+                            case "4":
+                                System.out.println("Enter new title: ");
+                                String title = scanner.nextLine();
 
-                            task.updateTask(title, description);
-                            break;
+                                System.out.println("Enter new description: ");
+                                String description = scanner.nextLine();
 
+                                task.updateTask(title, description);
+                                break;
+                            default:
+                                System.out.println("Invalid choice please choose 1, 2, 3, or 4");
+                                continue;
+
+                        }
+                        break;
                     }
-                }
                     break;
+                }
+
                 case "6":
                     running = false;
                     break;
                 default:
-                    System.out.println("Invalid Choice. Please enter 1, 2, 3, 4, or 5.");
+                    System.out.println("Invalid Choice. Please enter 1, 2, 3, 4, 5 or 6.");
             }
         }
     }
@@ -109,8 +115,7 @@ public class Main {
         String title = scanner.nextLine();
         System.out.println("Enter Task Description: ");
         String description = scanner.nextLine();
-        Priority priority;
-        priority = getPriorityInput(scanner);
+        Priority priority = getPriorityInput(scanner);
         return new Task(title, description, priority);
     }
 
@@ -120,30 +125,6 @@ public class Main {
         } else {
             for (Task task : tasks) {
                 System.out.println(task);
-            }
-        }
-    }
-
-    public static void displayNumberedTasks(ArrayList<Task> tasks) {
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + ". " + tasks.get(i));
-        }
-    }
-
-    public static int getTaskIndex(Scanner scanner, ArrayList<Task> tasks) {
-        while (true) {
-            String input = scanner.nextLine();
-
-            try {
-                int userChoice = Integer.parseInt(input);
-
-                if (userChoice >= 1 && userChoice <= tasks.size()) {
-                    return userChoice - 1;
-                } else {
-                    System.out.println("Task does not exist");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Please enter a valid number");
             }
         }
     }
@@ -181,7 +162,7 @@ public class Main {
                     System.out.println("Task not found");
                 } else {
                     return task;
-                    
+
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Please enter a valid number");
@@ -189,4 +170,5 @@ public class Main {
             }
         }
     }
+    scanner.close();
 }
