@@ -4,30 +4,35 @@ public class Main{
     public static void main(String[] args){
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        boolean runAgain = false;
-        do {
-            Task newTask = createTask(scanner);
-            tasks.add(newTask);
-            while(true){
-                System.out.println("Would you like to make another task? ");
-                String choice = scanner.nextLine();
-                if (choice.equalsIgnoreCase("yes")){
-                    runAgain = true;
+        boolean running = true;
+        while(running){
+            System.out.println("1.Add Task");
+            System.out.println("2.View Tasks");
+            System.out.println("3.Exit");
+            String choice = scanner.nextLine();
+            switch (choice){
+                case "1":
+                Task newTask = createTask(scanner);
+                tasks.add(newTask);
+                break;
+                case "2":
+                    if (tasks.isEmpty()){
+                        System.out.println("No tasks found");
+                    }
+                    else{
+                        for (Task task : tasks){
+                        System.out.println(task);
+                        }
+                        }
+                        
+                break;
+                case "3":
+                    running = false;
                     break;
-                }
-                else if (choice.equalsIgnoreCase("no")){
-                    runAgain = false;
-                    break;
-                }
-                else{
-                    System.out.println("Please enter yes or no.");
-                }
+                default:
+                    System.out.println("Invalid Choice. Please enter 1, 2, or 3.");
+                    
             }
-        } while(runAgain);
-        
-        
-        for (Task task : tasks){
-            System.out.println(task);
         }
     }
     public static Task createTask(Scanner scanner){
