@@ -8,7 +8,8 @@ public class Main{
         while(running){
             System.out.println("1.Add Task");
             System.out.println("2.View Tasks");
-            System.out.println("3.Exit");
+            System.out.println("3.Mark Task Complete");
+            System.out.println("4.Exit");
             String choice = scanner.nextLine();
             switch (choice){
                 case "1":
@@ -24,14 +25,41 @@ public class Main{
                         System.out.println(task);
                         }
                         }
-                        
                 break;
                 case "3":
+                    if (tasks.isEmpty()){
+                        System.out.println("No tasks found");
+                        break;
+                    }
+                    else{
+                        for( int i = 0; i < tasks.size() ; i++){
+                            System.out.println((i + 1) + ". " + tasks.get(i));
+                        }
+                        while (true){
+                            System.out.println("Which task would you like to mark as Completed");
+                            String input = scanner.nextLine();
+                            try{
+                                int userChoice = Integer.parseInt(input);
+                                if (userChoice >= 1 && userChoice <= tasks.size()){
+                                        int index = userChoice - 1;
+                                        tasks.get(index).markComplete();
+                                        break;
+                                    }
+                                else{
+                                    System.out.println("Task does not exist");
+                                }
+                            }
+                            catch (NumberFormatException e) {
+                                System.out.println("Please enter a valid number");
+                            }
+                        }  
+                        break;
+                    }
+                case "4":
                     running = false;
                     break;
                 default:
-                    System.out.println("Invalid Choice. Please enter 1, 2, or 3.");
-                    
+                    System.out.println("Invalid Choice. Please enter 1, 2, 3, or 4.");
             }
         }
     }
