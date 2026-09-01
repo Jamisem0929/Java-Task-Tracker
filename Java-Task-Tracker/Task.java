@@ -3,11 +3,17 @@ public class Task{
     private String description;
     private boolean completed;
     private Priority priority; 
+    private int id;
+    private static int nextId = 1;
+
     public Task(String title, String description, Priority priority){
         this.title = title;
         this.description = description;
         this.completed = false;
         this.priority = priority;
+        this.id = nextId;
+        nextId++;
+
         
         
     }
@@ -24,6 +30,9 @@ public class Task{
     public Priority getPriority(){
         return priority;
     }
+    public int getId(){
+        return id;
+    }
     //methods
     public void markComplete(){
         completed = true; 
@@ -38,7 +47,7 @@ public class Task{
     public void updatePriority(Priority priority){
         this.priority = priority;
     }
-    
+
     public void updateTask(String title, String description){
         this.title = title;
         this.description = description;
@@ -46,10 +55,10 @@ public class Task{
     @Override
     public String toString(){
         if (isCompleted()){
-            return getTitle() + " - " + getDescription() + " - "  + " - Complete - " + getPriority();
+            return "ID: " + getId() + " - " + getTitle() + " - " + getDescription()  + " - Complete - " + getPriority();
         }
         else{
-            return getTitle() + " - " + getDescription() + " - Incomplete - " + getPriority();
+            return "ID: " + getId() + " - " + getTitle() + " - " + getDescription() + " - Incomplete - " + getPriority();
         }
         
     }

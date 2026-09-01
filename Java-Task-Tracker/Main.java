@@ -62,7 +62,8 @@ public class Main {
                     System.out.println("What would you like to edit?");
                     System.out.println("1. Title");
                     System.out.println("2. Description");
-                    System.out.println("3 Both");
+                    System.out.println("3 Priority");
+                    System.out.println("4. Title and Description");
 
                     String editChoice = scanner.nextLine();
 
@@ -160,5 +161,13 @@ public class Main {
                 System.out.println("Invalid priority. Please enter LOW, MEDIUM, or HIGH.");
             }
         }
+    }
+    public static Task findTaskById(ArrayList<Task> tasks, int id){
+        for (Task task : tasks){
+            if (task.getId() == id){
+                return task;
+            }
+        }
+        return null;
     }
 }
