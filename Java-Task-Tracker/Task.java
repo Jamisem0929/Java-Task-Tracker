@@ -35,6 +35,10 @@ public class Task{
         this.description = description; 
 
     }
+    public void updatePriority(Priority priority){
+        this.priority = priority;
+    }
+    
     public void updateTask(String title, String description){
         this.title = title;
         this.description = description;
@@ -42,10 +46,10 @@ public class Task{
     @Override
     public String toString(){
         if (isCompleted()){
-            return getTitle() + " - " + getDescription() + " - "  + " - Complete " + getPriority();
+            return getTitle() + " - " + getDescription() + " - "  + " - Complete - " + getPriority();
         }
         else{
-            return getTitle() + " - " + getDescription() + " - Incomplete " + getPriority();
+            return getTitle() + " - " + getDescription() + " - Incomplete - " + getPriority();
         }
         
     }
