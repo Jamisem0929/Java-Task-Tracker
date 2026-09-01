@@ -23,6 +23,17 @@ public class Task{
     public void markComplete(){
         completed = true; 
     }
+    public void updateTitle(String title){
+        this.title = title;
+    }
+    public void updateDescription(String description){
+        this.description = description; 
+
+    }
+    public void updateTask(String title, String description){
+        this.title = title;
+        this.description = description;
+    }
     @Override
     public String toString(){
         if (isCompleted()){

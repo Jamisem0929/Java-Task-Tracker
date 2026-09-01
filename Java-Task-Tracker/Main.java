@@ -10,7 +10,8 @@ public class Main{
             System.out.println("2.View Tasks");
             System.out.println("3.Mark Task Complete");
             System.out.println("4.Delete Tasks");
-            System.out.println("5.Exit");
+            System.out.println("5.Edit");
+            System.out.println("6.Exit");
             String choice = scanner.nextLine();
             switch (choice){
                 case "1":
@@ -47,7 +48,48 @@ public class Main{
                     System.out.println("Task Deleted");
                     break;
                 }   
-                case "5":
+                case "5":{
+                    if (tasks.isEmpty()) {
+                        System.out.println("No tasks found");
+                        break;
+                    }
+
+                    displayNumberedTasks(tasks);
+                    System.out.println("Which task would you like to edit");
+                    int index = getTaskIndex(scanner, tasks);
+                    Task task = tasks.get(index);
+                    System.out.println("What would you like to edit?");
+                    System.out.println("1. Title");
+                    System.out.println("2. Description");
+                    System.out.println("3 Both");
+
+                    String editChoice = scanner.nextLine();
+
+                    switch (editChoice){
+                        case "1":
+                            System.out.println("Enter new title: ");
+                            String newTitle = scanner.nextLine();
+                            task.updateTitle(newTitle);
+                            break;
+                        case "2":
+                            System.out.println("Enter new description: ");
+                            String newDescription = scanner.nextLine();
+                            task.updateDescription(newDescription);
+                            break;
+                        case "3":
+                            System.out.println("Enter new title: ");
+                            String title = scanner.nextLine();
+
+                            System.out.println("Enter new description: ");
+                            String description = scanner.nextLine();
+
+                            task.updateTask(title, description);
+                            break;
+
+                    }
+                    }
+                    break;
+                case "6":
                     running = false;
                     break;
                 default:
