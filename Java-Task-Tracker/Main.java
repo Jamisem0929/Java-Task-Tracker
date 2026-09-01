@@ -4,8 +4,28 @@ public class Main{
     public static void main(String[] args){
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        Task newTask = createTask(scanner);
-        tasks.add(newTask);
+        boolean runAgain = false;
+        do {
+            Task newTask = createTask(scanner);
+            tasks.add(newTask);
+            while(true){
+                System.out.println("Would you like to make another task? ");
+                String choice = scanner.nextLine();
+                if (choice.equalsIgnoreCase("yes")){
+                    runAgain = true;
+                    break;
+                }
+                else if (choice.equalsIgnoreCase("no")){
+                    runAgain = false;
+                    break;
+                }
+                else{
+                    System.out.println("Please enter yes or no.");
+                }
+            }
+        } while(runAgain);
+        
+        
         for (Task task : tasks){
             System.out.println(task);
         }
