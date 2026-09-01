@@ -102,7 +102,9 @@ public class Main{
         String title = scanner.nextLine();
         System.out.println("Enter Task Description: ");
         String description = scanner.nextLine();
-        return new Task(title, description);
+        System.out.println("Enter Task Priority (LOW, MEDIUM, HIGH): ");
+        String priorityInput = scanner.nextLine().toUpperCase();
+        return new Task(title, description, Priority.valueOf(priorityInput));
        
     }
     public static void viewTasks(ArrayList<Task> tasks){

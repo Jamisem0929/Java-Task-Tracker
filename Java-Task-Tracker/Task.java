@@ -3,11 +3,11 @@ public class Task{
     private String description;
     private boolean completed;
     private Priority priority; 
-    public Task(String title, String description){
+    public Task(String title, String description, Priority priority){
         this.title = title;
         this.description = description;
         this.completed = false;
-        this.priority = Priority.MEDIUM;
+        this.priority = priority;
         
         
     }
@@ -20,6 +20,9 @@ public class Task{
     }
     public boolean isCompleted(){
         return completed;
+    }
+    public Priority getPriority(){
+        return priority;
     }
     //methods
     public void markComplete(){
@@ -39,10 +42,10 @@ public class Task{
     @Override
     public String toString(){
         if (isCompleted()){
-            return getTitle() + " - " + getDescription() + " - Complete";
+            return getTitle() + " - " + getDescription() + " - "  + " - Complete " + getPriority();
         }
         else{
-            return getTitle() + " - " + getDescription() + " - Incomplete";
+            return getTitle() + " - " + getDescription() + " - Incomplete " + getPriority();
         }
         
     }
