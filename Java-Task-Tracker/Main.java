@@ -1,11 +1,16 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Files;
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
+        Path path = Path.of("tasks.txt");
         while (running) {
             System.out.println("1. Add Task");
             System.out.println("2. View Tasks");
@@ -109,6 +114,11 @@ public class Main {
                     System.out.println("Invalid Choice. Please enter 1, 2, 3, 4, 5 or 6.");
             }
         }
+
+            saveTasks(tasks, path);
+
+
+        scanner.close();
     }
 
     public static Task createTask(Scanner scanner) {
@@ -169,6 +179,19 @@ public class Main {
                 System.out.println("Please enter a valid number");
 
             }
+        }
+    }
+    public static void saveTasks(ArrayList<Task> tasks, Path path){
+         ArrayList<String> lines = new ArrayList<>();
+        
+        for (Task task : tasks) {
+            lines.add(task.toFileString());
+
+        }
+        try{
+        Files.write(path, lines);
+        } catch (IOException e){
+            System.out.println("Failed to save tasks");
         }
     }
 

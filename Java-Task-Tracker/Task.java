@@ -52,6 +52,10 @@ public class Task{
         this.title = title;
         this.description = description;
     }
+    public String toFileString(){
+        
+       return id + "|" + title + "|" + description + "|" + completed +  "|" + priority;
+    }
     @Override
     public String toString(){
         if (isCompleted()){
