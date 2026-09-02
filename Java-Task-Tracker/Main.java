@@ -108,6 +108,7 @@ public class Main {
                     System.out.println("Invalid Choice. Please enter 1, 2, 3, 4, 5 or 6.");
             }
         }
+        scanner.close();
     }
 
     public static Task createTask(Scanner scanner) {
@@ -170,5 +171,5 @@ public class Main {
             }
         }
     }
-    scanner.close();
+    
 }
