@@ -90,6 +90,7 @@ public class Main {
                                 String description = scanner.nextLine();
 
                                 task.updateTask(title, description);
+                                System.out.println("Task updated");
                                 break;
                             default:
                                 System.out.println("Invalid choice please choose 1, 2, 3, or 4");
@@ -170,5 +171,5 @@ public class Main {
             }
         }
     }
-    scanner.close();
+
 }
