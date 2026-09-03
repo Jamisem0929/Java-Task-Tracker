@@ -116,13 +116,10 @@ public class Main {
                     System.out.println("Invalid Choice. Please enter 1, 2, 3, 4, 5 or 6.");
             }
         }
-<<<<<<< HEAD
-=======
 
             saveTasks(tasks, path);
 
 
->>>>>>> b43cdbafa122e5574ef98c12397691b100a8d783
         scanner.close();
     }
 
@@ -186,10 +183,6 @@ public class Main {
             }
         }
     }
-<<<<<<< HEAD
-    
-}
-=======
     public static void saveTasks(ArrayList<Task> tasks, Path path){
          ArrayList<String> lines = new ArrayList<>();
         
@@ -229,4 +222,3 @@ public class Main {
     }
 
 }
->>>>>>> b43cdbafa122e5574ef98c12397691b100a8d783
