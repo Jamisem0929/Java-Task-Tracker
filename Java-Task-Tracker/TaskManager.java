@@ -3,11 +3,18 @@ import java.util.ArrayList;
 public class TaskManager {
 
     private ArrayList<Task> tasks;
-
+//constructor
     public TaskManager(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
+//getter
+public ArrayList<Task> getTasks() {
+    return tasks;
+}
 
+
+
+//methods
     public Task findTaskById(int id) {
         for (Task task : tasks) {
             if (task.getId() == id) {
@@ -35,6 +42,24 @@ public class TaskManager {
 
         if (task != null) {
             task.markComplete();
+        }
+    }
+    public void updateTaskTitle(int id, String newTitle){
+        Task task = findTaskById(id);
+        if (task != null){
+            task.updateTitle(newTitle);
+        }
+    }
+    public void updateTaskDescription(int id, String newDescription){
+        Task task = findTaskById(id);
+        if (task != null){
+            task.updateDescription(newDescription);
+        }
+    }
+    public void updateTaskPriority(int id, Priority newPriority){
+        Task task = findTaskById(id);
+        if (task != null){
+            task.updatePriority(newPriority);
         }
     }
 }
