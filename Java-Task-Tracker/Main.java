@@ -25,6 +25,8 @@ public class Main {
                 case "1":
                     Task newTask = createTask(scanner);
                     tasks.add(newTask);
+
+                    saveTasks(tasks, path);
                     break;
                 case "2":
                     viewTasks(tasks);
@@ -39,6 +41,7 @@ public class Main {
                     System.out.println("Which task would you like to mark as completed");
                     Task task = getTaskById(scanner, tasks);
                     task.markComplete();
+                    saveTasks(tasks, path);
                     System.out.println("Task marked as completed");
                     break;
                 }
@@ -53,6 +56,7 @@ public class Main {
                     System.out.println("Which task would you like to delete");
                     Task task = getTaskById(scanner, tasks);
                     tasks.remove(task);
+                    saveTasks(tasks, path);
                     System.out.println("Task Deleted");
                     break;
                 }
@@ -78,16 +82,19 @@ public class Main {
                                 System.out.println("Enter new title: ");
                                 String newTitle = scanner.nextLine();
                                 task.updateTitle(newTitle);
+                                saveTasks(tasks, path); 
                                 break;
                             case "2":
                                 System.out.println("Enter new description: ");
                                 String newDescription = scanner.nextLine();
                                 task.updateDescription(newDescription);
+                                saveTasks(tasks, path);
                                 break;
                             case "3":
                                 Priority priority = getPriorityInput(scanner);
 
                                 task.updatePriority(priority);
+                                saveTasks(tasks, path); 
                                 break;
                             case "4":
                                 System.out.println("Enter new title: ");
@@ -97,6 +104,7 @@ public class Main {
                                 String description = scanner.nextLine();
 
                                 task.updateTask(title, description);
+                                saveTasks(tasks, path);
                                 System.out.println("Task updated");
                                 break;
                             default:
@@ -206,13 +214,24 @@ public class Main {
                 List<String> lines = Files.readAllLines(path);
                 for (String line : lines){
                     String[] parts = line.split("\\|");
+                    if (parts.length != 5){
+                        continue;
+                    }
+                    if (!parts[3].equalsIgnoreCase("true") && !parts[3].equalsIgnoreCase("false")){
+                        continue;
+                    }
+                    try {
                     int id = Integer.parseInt(parts[0]);
-                    String title = parts[1];
-                    String description = parts[2];
+                    String title = parts[1].replace("\\p", "|");
+                    String description = parts[2].replace("\\p", "|");
                     boolean completed = Boolean.parseBoolean(parts[3]);
                     Priority priority = Priority.valueOf(parts[4]);
                     Task task = new Task(id, title, description, completed, priority);
                     tasks.add(task);
+
+                    } catch(IllegalArgumentException e){
+                        continue;
+                    }
                 }
                 
             } catch (IOException e){

@@ -61,8 +61,9 @@ public class Task{
         this.description = description;
     }
     public String toFileString(){
-        
-       return id + "|" + title + "|" + description + "|" + completed +  "|" + priority;
+        String safeTitle = title.replace("|", "\\p");
+        String safeDescription = description.replace("|", "\\p");
+       return id + "|" + safeTitle + "|" + safeDescription + "|" + completed +  "|" + priority;
     }
     @Override
     public String toString(){
