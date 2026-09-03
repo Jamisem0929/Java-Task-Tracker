@@ -1,16 +1,18 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Files;
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList<Task> tasks = new ArrayList<>();
+        Path path = Path.of("tasks.txt");
+        ArrayList<Task> tasks = loadTasks(path);  
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
-        Path path = Path.of("tasks.txt");
         while (running) {
             System.out.println("1. Add Task");
             System.out.println("2. View Tasks");
@@ -193,6 +195,30 @@ public class Main {
         } catch (IOException e){
             System.out.println("Failed to save tasks");
         }
+    }
+
+    public static ArrayList<Task> loadTasks(Path path){
+        ArrayList<Task> tasks = new ArrayList<>();
+        if (!Files.exists(path)){
+            return tasks;
+        }
+            try {
+                List<String> lines = Files.readAllLines(path);
+                for (String line : lines){
+                    String[] parts = line.split("\\|");
+                    int id = Integer.parseInt(parts[0]);
+                    String title = parts[1];
+                    String description = parts[2];
+                    boolean completed = Boolean.parseBoolean(parts[3]);
+                    Priority priority = Priority.valueOf(parts[4]);
+                    Task task = new Task(id, title, description, completed, priority);
+                    tasks.add(task);
+                }
+                
+            } catch (IOException e){
+                System.out.println("Tasks failed to load");
+            }
+        return tasks;
     }
 
 }

@@ -13,9 +13,17 @@ public class Task{
         this.priority = priority;
         this.id = nextId;
         nextId++;
+    }
+    public Task(int id, String title, String description, boolean completed, Priority priority){
+        this.id = id;
+        if (id >= nextId){
+            nextId = id + 1;
+        }
+        this.title = title;
+        this.description = description;
+        this.completed = completed;
+        this.priority = priority;
 
-        
-        
     }
     //Getters
     public String getTitle(){
