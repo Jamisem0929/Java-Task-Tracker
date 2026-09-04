@@ -9,9 +9,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ComboBox;
+import java.nio.file.Path;
 
 public class TaskTrackerApp extends Application {
     
+
+
+    Path path = Path.of("tasks.txt");
 
     @Override
     public void start(Stage stage){
@@ -34,7 +38,7 @@ public class TaskTrackerApp extends Application {
             Priority.LOW,
             Priority.MEDIUM,
             Priority.HIGH
-        )
+        );
         priorityBox.setValue(Priority.MEDIUM);
         addButton.setOnAction(event -> {
             String title = titleField.getText();
@@ -42,12 +46,16 @@ public class TaskTrackerApp extends Application {
 
             String description = descriptionArea.getText();
             System.out.println(description);
+
+            Priority priority = priorityBox.getValue();
+
         });
 
         
         layout.getChildren().add(addButton);
         layout.getChildren().add(titleField);
         layout.getChildren().add(descriptionArea);
+        layout.getChildren().add(priorityBox);
 
 
 
